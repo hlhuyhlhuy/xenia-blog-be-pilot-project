@@ -1,0 +1,935 @@
+openapi: 3.0.0
+info:
+  title: APIs Document TeamDUT Blog 
+  license:
+    name: Contact HuyHo.Xenia
+    url: https://www.facebook.com/holehuy23.it
+  version: '1.0'
+servers:
+- url: https://app-xenia.herokuapp.com
+  variables: {}
+paths:
+  /api/users:
+    post:
+      tags:
+      - User
+      summary: Create User
+      description:
+      operationId: CreateUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+            example:
+              email: admin1@gmail.com
+              name: tk1
+              password: '123456789'
+              passwordConfirmation: '123456789'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - User
+      summary: Get Current User
+      operationId: GetCurrentUser
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /api/sessions:
+    post:
+      tags:
+      - User
+      summary: Create Session
+      description: ''
+      operationId: CreateSession
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionRequest'
+            example:
+              email: admin1@gmail.com
+              password: '123456789'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    delete:
+      tags:
+      - User
+      summary: Delete Session
+      description: ''
+      operationId: DeleteSession
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - User
+      summary: Get Sessions
+      operationId: GetSessions
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /api/posts:
+    post:
+      tags:
+      - Post
+      summary: Create Post
+      operationId: CreatePost
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePostRequest'
+            example:
+              title: Đây là nội dung của bài viết
+              body: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BsC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of
+              image: https://link-image.com.vn
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Post
+      summary: Get Many Posts
+      operationId: GetManyPosts
+      parameters:
+      - name: sort_by
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: -comments,+comments,-likes,+likes,-createdAt,+createdAt
+      - name: page
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 1
+      - name: per_page
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 10
+      - name: search
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: key-search
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /api/mypost:
+    get:
+      tags:
+      - Post
+      summary: Get My Posts
+      operationId: GetMyPosts
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      - name: sort_by
+        in: query
+        description: ''
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: -comments,+comments,-likes,+likes,-createdAt,+createdAt
+      - name: page
+        in: query
+        description: ''
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 1
+      - name: per_page
+        in: query
+        description: ''
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 10
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /posts/{postId}:
+    put:
+      tags:
+      - Post
+      summary: Update Post
+      operationId: UpdatePost
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      - name: postId
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePostRequest'
+            example:
+              title: Admin có những quyền gì, phân quyền trong Expressjs UPDATE
+              body: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Post
+      summary: Get One Post
+      operationId: GetOnePost
+      parameters:
+      - name: postId
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Post
+      summary: Delete Post
+      operationId: DeletePost
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      - name: postId
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - Comment
+      summary: Create Comment
+      operationId: CreateComment
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      - name: postId
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommentRequest'
+            example:
+              body: Comment đầu tiên nè
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /likes/{postId}:
+    post:
+      tags:
+      - Like & Unlike
+      summary: Create Like or Unlike
+      operationId: CreateLikeorUnlike
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      - name: postId
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/{name}:
+    put:
+      tags:
+      - User
+      summary: Update User Information
+      operationId: UpdateUserInformation
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      - name: name
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserInformationRequest'
+            example:
+              name: tk1update
+              email: tk1update@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /password/{name}:
+    put:
+      tags:
+      - User
+      summary: Change Password
+      operationId: ChangePassword
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      - name: name
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+            example:
+              password: '123456789'
+              newPassword: '1234567'
+              newPasswordConfirmation: '1234567'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /avatar/{name}:
+    put:
+      tags:
+      - User
+      summary: Change Avatar
+      operationId: ChangeAvatar
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      - name: name
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeAvatarRequest'
+            example:
+              avatar: "https://imgur.com/f79yLYY"
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /forgor-password:
+    put:
+      tags:
+      - Password
+      summary: Forgot Password
+      operationId: ForgotPassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPasswordSchema'
+            example:
+              email: xuser1@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /reset-password:
+    put:
+      tags:
+      - Password
+      summary: Reset Password
+      operationId: ResetPassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordSchema'
+            example:
+              resetLink: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImF2YXRhciI6Imh0dHBzOi8vaS5pbWd1ci5jb20vS0R2M25DVC5wbmciLCJyZXNldExpbmsiOiIiLCJfaWQiOiI2MGJlZDU5Mjg0MDI0MzI4ZjM3ZmIxOWYiLCJlbWFpbCI6Imh1eS5ob0B4ZW5pYS50ZWNoIiwibmFtZSI6Imh1eWhvIiwiY3JlYXRlZEF0IjoiMjAyMS0wNi0wOFQwMjoyNzozMC43MzdaIiwidXBkYXRlZEF0IjoiMjAyMS0wNi0wOFQwMjo1MTowNS45NzRaIiwiX192IjowLCJzZXNzaW9uIjoiNjBiZWRiMzcxNjlmNzIzMDMyYjMzY2U2IiwiaWF0IjoxNjIzMTIwNjk1LCJleHAiOjE2MjMxMjI0OTV9.cQOjjrjzixK7YadMagWh1sseM7hCGFUMMcDJLxbPgbo"
+              newPassword: "newpassword"
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /api/notification:
+    get:
+      tags: 
+      - Notification
+      summary: Get Admin Notification
+      operationId: GetNotification
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      - name: sort_by
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: -createdAt,+createdAt
+      - name: page
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 1
+      - name: per_page
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 10
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    post:
+      tags: 
+      - Notification
+      summary: SeeAllNotifications
+      operationId: SeeAllNotifications
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /api/notification/{notificationId}:
+    post:
+      tags: 
+      - Notification
+      summary: Set Viewed Notifications
+      operationId: SetViewedNotifications
+      parameters:
+      - name: x-refresh
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "{{refreshToken}}"
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "Bearer {{accessToken}}"
+      - name: notificationId
+        in: params
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: "keoL-sknen"
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /api/comments/{postId}:
+    get:
+      tags:
+      - Comment
+      summary: Get Comments of Post
+      operationId: GetCommentsOfPost
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    CreateUserRequest:
+      title: CreateUserRequest
+      required:
+      - email
+      - name
+      - password
+      - passwordConfirmation
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        password:
+          type: string
+          minLength: 8
+          maxLength: 20
+        passwordConfirmation:
+          type: string
+          required: Password much match
+      example:
+        email: admin1@gmail.com
+        name: tk1
+        password: '123456789'
+        passwordConfirmation: '123456789'
+    ForgotPasswordSchema: 
+      title: ForgotPasswordRequest
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+      example:
+        email: xuser1@gmail.com
+    ResetPasswordSchema: 
+      title: ResetPasswordRequest
+      required:
+      - resetLink
+      - newPassword
+      type: object
+      properties:
+        resetLink:
+          type: string
+        newPassword:
+          type: string
+      example:
+        resetLink: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImF2YXRhciI6Imh0dHBzOi8vaS5pbWd1ci5jb20vS0R2M25DVC5wbmciLCJyZXNldExpbmsiOiIiLCJfaWQiOiI2MGJlZDU5Mjg0MDI0MzI4ZjM3ZmIxOWYiLCJlbWFpbCI6Imh1eS5ob0B4ZW5pYS50ZWNoIiwibmFtZSI6Imh1eWhvIiwiY3JlYXRlZEF0IjoiMjAyMS0wNi0wOFQwMjoyNzozMC43MzdaIiwidXBkYXRlZEF0IjoiMjAyMS0wNi0wOFQwMjo1MTowNS45NzRaIiwiX192IjowLCJzZXNzaW9uIjoiNjBiZWRiMzcxNjlmNzIzMDMyYjMzY2U2IiwiaWF0IjoxNjIzMTIwNjk1LCJleHAiOjE2MjMxMjI0OTV9.cQOjjrjzixK7YadMagWh1sseM7hCGFUMMcDJLxbPgbo
+        newPassword: newpassword
+    CreateSessionRequest:
+      title: CreateSessionRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: admin1@gmail.com
+        password: '123456789'
+    CreatePostRequest:
+      title: CreatePostRequest
+      required:
+      - title
+      - body
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        image: 
+          type: string
+      example:
+        title: Đây là nội dung của bài viết
+        body: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BsC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of
+    UpdatePostRequest:
+      title: UpdatePostRequest
+      required:
+      - title
+      - body
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+      example:
+        title: Admin có những quyền gì, phân quyền trong Expressjs UPDATE
+        body: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of
+    CreateCommentRequest:
+      title: CreateCommentRequest
+      required:
+      - body
+      type: object
+      properties:
+        body:
+          type: string
+      example:
+        body: Comment đầu tiên nè
+    UpdateUserInformationRequest:
+      title: UpdateUserInformationRequest
+      required:
+      - name
+      - email
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+      example:
+        name: tk1update
+        email: tk1update@gmail.com
+    ChangePasswordRequest:
+      title: ChangePasswordRequest
+      required:
+      - password
+      - newPassword
+      - newPasswordConfirmation
+      type: object
+      properties:
+        password:
+          type: string
+        newPassword:
+          type: string
+        newPasswordConfirmation:
+          type: string
+      example:
+        password: '123456789'
+        newPassword: '1234567'
+        newPasswordConfirmation: '1234567'
+    ChangeAvatarRequest:
+      title: ChangeAvatarRequest
+      required:
+      - avatar
+      type: object
+      properties:
+        password:
+          type: string
+      example:
+        avatar: 'https://imgur.com/f79yLYY' 
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+- httpBearer: []
+tags:
+- name: Misc
+  description: ''
